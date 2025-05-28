@@ -1,0 +1,63 @@
+﻿@model  Entity.Opsiyon
+
+@{
+    ViewData["Title"] = "Ekle";
+}
+
+<h1>Ekle</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AracId" class="control-label"></label>
+                <select asp-for="AracId" class ="form-select" asp-items="ViewBag.AracId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MusteriId" class="control-label"></label>
+                <select asp-for="MusteriId" class ="form-select" asp-items="ViewBag.MusteriId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="OpsiyonFiyati" class="control-label"></label>
+                <input asp-for="OpsiyonFiyati" class="form-control" />
+                <span asp-validation-for="OpsiyonFiyati" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OpsiyonTarihi" class="control-label"></label>
+                <input asp-for="OpsiyonTarihi" class="form-control" />
+                <span asp-validation-for="OpsiyonTarihi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OpsiyonBitisTarihi" class="control-label"></label>
+                <input asp-for="OpsiyonBitisTarihi" class="form-control" />
+                <span asp-validation-for="OpsiyonBitisTarihi" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Ekle" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-secondary mt-2" asp-action="Index">Listeye Dön</a>
+</div>
+
+@section Scripts
+    {
+
+    @if (TempData["basarisiz"] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "Ekleme basarısız",
+                text: "@TempData["basarisiz"]"
+            });
+
+        </script>
+    }
+}
+

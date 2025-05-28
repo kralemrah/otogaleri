@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+
+
+
+
+@section Scripts
+    {
+
+    @if (TempData["basarili"] != null)
+    {
+        <script>
+
+            Swal.fire({
+                title: "BASARILI",
+                text: "@TempData["basarili"]",
+                icon: "success"
+            });
+        </script>
+    }
+
+    }
+

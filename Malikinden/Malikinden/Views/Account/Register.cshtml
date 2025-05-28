@@ -1,0 +1,78 @@
+﻿@model Entity.Kullanici
+
+@{
+    ViewData["Title"] = "Kayıt Ol";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h3 class="mb-0"><i class="bi bi-person-plus me-2"></i>Yeni Hesap Oluştur</h3>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Register">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Adi" class="form-control" placeholder="Adınız" />
+                                    <label asp-for="Adi">Adınız</label>
+                                    <span asp-validation-for="Adi" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Soyadi" class="form-control" placeholder="Soyadınız" />
+                                    <label asp-for="Soyadi">Soyadınız</label>
+                                    <span asp-validation-for="Soyadi" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Email" class="form-control" placeholder="E-posta" type="email" />
+                            <label asp-for="Email">E-posta</label>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Telefon" class="form-control" placeholder="Telefon" />
+                            <label asp-for="Telefon">Telefon</label>
+                            <span asp-validation-for="Telefon" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Sifre" class="form-control" placeholder="Şifre" type="password" />
+                            <label asp-for="Sifre">Şifre</label>
+                            <span asp-validation-for="Sifre" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-person-plus-fill me-2"></i>Kayıt Ol
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center py-3">
+                    <div class="small">
+                        Zaten hesabınız var mı? <a asp-action="Login" class="text-primary">Giriş Yapın</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+
+
+
+

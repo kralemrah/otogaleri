@@ -1,0 +1,88 @@
+﻿@model HomePageViewModel
+
+@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        @foreach (var item in Model.Sliderlar)
+        {
+            <div class="carousel-item @(item==Model.Sliderlar.FirstOrDefault()? "active" : " ")">
+                <img src="/Img/Slider/@item.Resim" class="d-block w-100" alt="..." style="height:600px;">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>@item.Baslik</h5>
+                    <p>@item.Acıklama</p>
+                </div>
+            </div>
+        }
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-12 text-center">
+            <div class="p-4 bg-light rounded shadow-sm">
+                <h2 class="mb-3">Size En Uygun Aracı Bulalım!</h2>
+                <p class="lead mb-4">Bütçenize ve tercihlerinize göre en uygun araçları sizin için seçelim.</p>
+                <a href="@Url.Action("AracOneri", "Home")" class="btn btn-primary btn-lg px-5 py-3">
+                    <i class="fas fa-car me-2"></i> Araç Önerisi Al
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container px-4 px-lg-5 mt-5">
+    <div class="row">
+        <div class="col-12 text-center mb-4">
+            <h2>Öne Çıkan Araçlar</h2>
+        </div>
+    </div>
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        @foreach (var item in Model.Araclar)
+        {
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Product image-->
+                    <img class="card-img-top" src="/Img/Cars/@item.Resim1" alt="...">
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">@item.Marka?.Adi @item.Model</h5>
+                            <p>@item.YakitTipi - @item.VitesTipi</p>
+                            <p>@item.KasaTipi - @item.ModelYili</p>
+                            <!-- Product price-->
+                            @item.Fiyat TL
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center">
+                            <a class="btn btn-outline-dark mt-auto" href="/Arac/Index/@item.Id">İncele</a>
+                            @if (Context.User.Identity.IsAuthenticated)
+                            {
+                                <form action="/Favorites/Add" method="post">
+                                    <input type="hidden" name="aracId" value="@item.Id" />
+                                    <button type="submit" class="btn btn-outline-warning mt-2">Favorilere Ekle</button>
+                                </form>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+

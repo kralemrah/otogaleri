@@ -1,0 +1,75 @@
+﻿@using Entity
+@model IEnumerable<Opsiyon>
+
+@{
+    ViewData["Title"] = "Ekle";
+}
+
+<h1>Ekle</h1>
+
+<p>
+    <a class="btn btn-success" asp-action="Create">Yeni Ekle</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OpsiyonFiyati)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OpsiyonTarihi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OpsiyonBitisTarihi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Arac)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Musteri)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => item.OpsiyonFiyati)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.OpsiyonTarihi)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpsiyonBitisTarihi)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Arac.KasaTipi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Musteri.Adi)
+            </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts
+    {
+
+    @if (TempData["basarili"] != null)
+    {
+        <script>
+
+            Swal.fire({
+                title: "OPSIYON",
+                text: "@TempData["basarili"]",
+                icon: "success"
+            });
+        </script>
+    }
+}
+

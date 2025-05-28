@@ -1,0 +1,265 @@
+@model Malikinden.Models.AracOneriViewModel
+
+@{
+    ViewData["Title"] = "Araç Öneri Sistemi";
+}
+
+<style type="text/css">
+    .pulse-button {
+        animation: pulseAnimation 2s infinite;
+        padding: 15px 30px;
+        border-radius: 30px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+    }
+    .pulse-button:hover {
+        animation: none;
+        transform: scale(1.1);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+    @@keyframes pulseAnimation {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Araç Öneri Sistemi</h3>
+                </div>
+                <div class="card-body">
+                    <form id="aracOneriForm" asp-action="AracOneriSonuc" method="post">
+                        <div class="mb-3">
+                            <label asp-for="FiyatAraligi" class="form-label"></label>
+                            <select asp-for="FiyatAraligi" class="form-select">
+                                <option value="">Seçiniz</option>
+                                <option value="0-250000">0 - 250.000 TL</option>
+                                <option value="250000-500000">250.000 - 500.000 TL</option>
+                                <option value="500000-750000">500.000 - 750.000 TL</option>
+                                <option value="750000-1000000">750.000 - 1.000.000 TL</option>
+                                <option value="1000000-1500000">1.000.000 - 1.500.000 TL</option>
+                                <option value="1500000-2000000">1.500.000 - 2.000.000 TL</option>
+                                <option value="2000000-">2.000.000 TL ve üzeri</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="YakitTipi" class="form-label"></label>
+                            <select asp-for="YakitTipi" class="form-select">
+                                <option value="">Seçiniz</option>
+                                <option value="Benzin">Benzin</option>
+                                <option value="Dizel">Dizel</option>
+                                <option value="LPG">LPG</option>
+                                <option value="Elektrik">Elektrik</option>
+                                <option value="Hibrit">Hibrit</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="VitesTipi" class="form-label"></label>
+                            <select asp-for="VitesTipi" class="form-select">
+                                <option value="">Seçiniz</option>
+                                <option value="Manuel">Manuel</option>
+                                <option value="Otomatik">Otomatik</option>
+                                <option value="Yarı Otomatik">Yarı Otomatik</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="ModelYili" class="form-label"></label>
+                            <select asp-for="ModelYili" class="form-select">
+                                <option value="">Seçiniz</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                                <option value="2019">2019</option>
+                                <option value="2018">2018</option>
+                                <option value="2017">2017</option>
+                                <option value="2016">2016</option>
+                                <option value="2015">2015</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="KasaTipi" class="form-label"></label>
+                            <select asp-for="KasaTipi" class="form-select">
+                                <option value="">Seçiniz</option>
+                                <option value="Sedan">Sedan</option>
+                                <option value="Hatchback">Hatchback</option>
+                                <option value="SUV">SUV</option>
+                                <option value="Crossover">Crossover</option>
+                                <option value="Station Wagon">Station Wagon</option>
+                                <option value="Pickup">Pickup</option>
+                                <option value="Coupe">Coupe</option>
+                                <option value="Cabrio">Cabrio</option>
+                                <option value="MPV">MPV</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="OzelIstekler" class="form-label"></label>
+                            <textarea asp-for="OzelIstekler" class="form-control" rows="3" placeholder="Özel isteklerinizi yazabilirsiniz..."></textarea>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Araç Önerisi Al</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div >
+            
+            <div class="text-center">
+                <h3> Genel araçlar ile ilgili detaylı sohbet etmek ve öneri almak isterseniz araç asistanı ile görüşebilirsiniz...</h3>
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="button" class="btn btn-info btn-lg pulse-button" data-bs-toggle="modal" data-bs-target="#aracAsistaniModal">
+                    <i class="bi bi-robot"></i> Araç Asistanı
+                </button>
+            </div>
+            </div>
+            <!-- Araç Asistanı Modal -->
+            <div class="modal fade" id="aracAsistaniModal" tabindex="-1" aria-labelledby="aracAsistaniModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title" id="aracAsistaniModalLabel">Araç Asistanı</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="chat-container" style="height: 400px; overflow-y: auto;">
+                                <div id="chatMessages" class="p-3"></div>
+                            </div>
+                            <div class="input-group mt-3">
+                                <input type="text" id="userMessage" class="form-control" placeholder="Sorunuzu yazın...">
+                                <button class="btn btn-primary" type="button" id="sendMessage">Gönder</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="sonuclar" class="mt-4" style="display: none;">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="mb-0">Size Özel Araç Önerileri</h4>
+                    </div>
+                    <div class="card-body">
+                        <div id="oneriListesi"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#aracOneriForm').on('submit', function (e) {
+                e.preventDefault();
+                
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        if (response.success) {
+                            var html = '';
+                            response.oneriler.forEach(function (oneri) {
+                                html += `
+                                    <div class="card mb-3">
+                                        <div class="row g-0">
+                                            <div class="col-md-4">
+                                                <img src="${oneri.resimUrl}" class="img-fluid rounded-start" alt="${oneri.marka} ${oneri.model}" style="height: 200px; object-fit: cover;">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">${oneri.marka} ${oneri.model}</h5>
+                                                    <p class="card-text">
+                                                        <strong>Fiyat:</strong> ${oneri.fiyat}<br>
+                                                        <strong>Model Yılı:</strong> ${oneri.modelYili}<br>
+                                                        <strong>Kilometre:</strong> ${oneri.kilometre}<br>
+                                                        <strong>Yakıt:</strong> ${oneri.yakitTipi}<br>
+                                                        <strong>Vites:</strong> ${oneri.vitesTipi}<br>
+                                                        <strong>Kasa:</strong> ${oneri.kasaTipi}<br>
+                                                        <p class="mb-2">
+                                                            <strong>Uyumluluk Puanı:</strong> <span class="badge bg-success">${oneri.puan} / 100</span>
+                                                        </p>
+                                                    </p>
+                                                    <a href="/Arac/Index/${oneri.id}" class="btn btn-primary">Detayları Gör</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+                            });
+                            
+                            $('#oneriListesi').html(html);
+                            $('#sonuclar').show();
+                        } else {
+                            alert('Üzgünüz, kriterlerinize uygun araç bulunamadı.');
+                        }
+                    },
+                    error: function () {
+                        alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+                    }
+                });
+            });
+
+            function addMessage(message, isUser) {
+                const messageDiv = $('<div>').addClass('mb-3');
+                const messageContent = $('<div>').addClass(isUser ? 'bg-primary text-white' : 'bg-light')
+                    .addClass('p-3 rounded')
+                    .addClass(isUser ? 'float-end' : 'float-start')
+                    .css('max-width', '80%')
+                    .text(message);
+                
+                messageDiv.append(messageContent);
+                $('#chatMessages').append(messageDiv);
+                $('#chatMessages').scrollTop($('#chatMessages')[0].scrollHeight);
+            }
+
+            $('#sendMessage').click(function() {
+                const message = $('#userMessage').val().trim();
+                if (message) {
+                    addMessage(message, true);
+                    $('#userMessage').val('');
+                    
+                    $.ajax({
+                        url: '/ChatBot/GetResponse',
+                        type: 'POST',
+                        data: JSON.stringify(message),
+                        contentType: 'application/json',
+                        success: function(response) {
+                            addMessage(response, false);
+                        },
+                        error: function() {
+                            addMessage('Üzgünüm, bir hata oluştu. Lütfen tekrar deneyin.', false);
+                        }
+                    });
+                }
+            });
+
+            $('#userMessage').keypress(function(e) {
+                if (e.which == 13) {
+                    $('#sendMessage').click();
+                }
+            });
+
+            $('#aracAsistaniModal').on('shown.bs.modal', function () {
+                if ($('#chatMessages').children().length === 0) {
+                    addMessage('Merhaba! Size araçlar hakkında yardımcı olabilirim. Ne öğrenmek istersiniz?', false);
+                }
+            });
+        });
+    </script>
+} 

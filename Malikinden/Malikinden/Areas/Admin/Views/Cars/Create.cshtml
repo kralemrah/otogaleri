@@ -1,0 +1,128 @@
+﻿@model Entity.Arac
+
+@{
+    ViewData["Title"] = "Yeni Ekle";
+}
+
+<h1>Yeni Ekle</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="MarkaId" class="control-label"></label>
+                <select asp-for="MarkaId" class ="form-select" asp-items="ViewBag.MarkaId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Model" class="control-label"></label>
+                <input asp-for="Model" class="form-control" />
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fiyat" class="control-label"></label>
+                <input asp-for="Fiyat" class="form-control" />
+                <span asp-validation-for="Fiyat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="YakitTipi" class="control-label"></label>
+                <input asp-for="YakitTipi" class="form-control" />
+                <span asp-validation-for="YakitTipi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VitesTipi" class="control-label"></label>
+                <input asp-for="VitesTipi" class="form-control" />
+                <span asp-validation-for="VitesTipi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MotorHacmi" class="control-label"></label>
+                <input asp-for="MotorHacmi" class="form-control" />
+                <span asp-validation-for="MotorHacmi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BeygirGucu" class="control-label"></label>
+                <input asp-for="BeygirGucu" class="form-control" />
+                <span asp-validation-for="BeygirGucu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="YakitTuketimi" class="control-label"></label>
+                <input asp-for="YakitTuketimi" class="form-control" />
+                <span asp-validation-for="YakitTuketimi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KasaTipi" class="control-label"></label>
+                <input asp-for="KasaTipi" class="form-control" />
+                <span asp-validation-for="KasaTipi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModelYili" class="control-label"></label>
+                <input asp-for="ModelYili" class="form-control" />
+                <span asp-validation-for="ModelYili" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kilometre" class="control-label"></label>
+                <input asp-for="Kilometre" class="form-control" />
+                <span asp-validation-for="Kilometre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Renk" class="control-label"></label>
+                <input asp-for="Renk" class="form-control" />
+                <span asp-validation-for="Renk" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Notlar" class="control-label"></label>
+                <textarea asp-for="Notlar" class="form-control"></textarea>
+                <span asp-validation-for="Notlar" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SatistaMi" class="control-label"></label>
+                <input asp-for="SatistaMi" type="checkbox" class="form-check-input" />
+                <span asp-validation-for="SatistaMi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Anasayfa" class="control-label"></label>
+                <input asp-for="Anasayfa" type="checkbox" class="form-check-input" />
+                <span asp-validation-for="Anasayfa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resim1" class="control-label"></label>
+                <input asp-for="Resim1" class="form-control" type="file" />
+                <span asp-validation-for="Resim1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resim2" class="control-label"></label>
+                <input asp-for="Resim2" class="form-control" type="file" />
+                <span asp-validation-for="Resim2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resim3" class="control-label"></label>
+                <input asp-for="Resim3" class="form-control" type="file" />
+                <span asp-validation-for="Resim3" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Ekle" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+<a class="btn btn-secondary mt-2" asp-action="Index">Listeye Dön</a>
+</div>
+
+@section Scripts
+    {
+    @if (TempData["basarisiz"] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "Ekleme basarısız",
+                text: "@TempData["basarisiz"]"
+            });
+        </script>
+    }
+}
+

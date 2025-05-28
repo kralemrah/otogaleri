@@ -1,0 +1,49 @@
+﻿@model CustomerLoginViewModel
+@{
+    ViewData["Title"] = "Üye Girişi";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h3 class="mb-0"><i class="bi bi-person-circle me-2"></i>Üye Girişi</h3>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Login">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        
+                        <div class="form-floating mb-3">
+                            <input asp-for="Email" class="form-control" placeholder="E-posta" />
+                            <label asp-for="Email">E-posta</label>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Sifre" class="form-control" placeholder="Şifre" type="password" />
+                            <label asp-for="Sifre">Şifre</label>
+                            <span asp-validation-for="Sifre" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>Giriş Yap
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center py-3">
+                    <div class="small">
+                        Hesabınız yok mu? <a asp-action="Register" class="text-primary">Hemen Kaydolun</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

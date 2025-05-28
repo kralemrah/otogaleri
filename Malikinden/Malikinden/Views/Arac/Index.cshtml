@@ -1,0 +1,110 @@
+﻿@model Entity.Arac;
+@{
+	ViewData["Title"] = Model.Marka.Adi + "  " + Model.Model;
+}
+
+<section class="py-5">
+	<div class="container px-4 px-lg-5 my-5">
+		<div class="row gx-4 gx-lg-5 align-items-center">
+			<div class="col-md-6">
+				<div id="carouselExample" class="carousel slide">
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<img src="/Img/Cars/@Model.Resim1" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+							<img src="/Img/Cars/@Model.Resim2" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+							<img src="/Img/Cars/@Model.Resim3" class="d-block w-100" alt="...">
+						</div>
+					</div>
+					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+				
+			</div>
+			<div class="col-md-6">
+				<div class="small mb-1"></div>
+				<h1 class="display-5 fw-bolder"> @ViewData["Title"]</h1>
+				<div class="fs-5 mb-5">
+					<h2><span>@Model.Fiyat TL</span></h2>
+				</div>
+				<div class="fs-5 mb-5">
+					<span>Kasa Tipi: @Model.KasaTipi </span>
+				</div>
+
+				<div class="fs-5 mb-5">
+					<span>Yakıt Tipi: @Model.YakitTipi </span>
+				</div>
+
+				<div class="fs-5 mb-5">
+					<span>Vites Tipi: @Model.VitesTipi </span>
+				</div>
+
+				<div class="fs-5 mb-5">
+					<span>Model Yılı: @Model.ModelYili</span>
+				</div>
+
+				<div class="fs-5 mb-5">
+					<span>Kilometre: @Model.Kilometre</span>
+				</div>
+
+				<div class="fs-5 mb-5">
+					<span>Renk: @Model.Renk</span>
+				</div>
+				<div class="fs-5 mb-5">
+					<span>Beygir Gücü: @Model.BeygirGucu</span>
+				</div>
+				<div class="fs-5 mb-5">
+					<span>YAkıt Tüketimi: @Model.YakitTuketimi</span>
+				</div>
+				<div class="fs-5 mb-5">
+					<span>Motor Hacmi: @Model.MotorHacmi</span>
+				</div>
+				
+
+				@if (!string.IsNullOrEmpty(Model.Notlar))
+				{
+					<div class="fs-5 mb-5">
+						<span>Notlar: @Model.Notlar</span>
+					</div>
+				}
+
+				<div class="d-flex">
+					@if (Context.User.Identity.IsAuthenticated)
+					{
+						<button class="btn btn-outline-dark flex-shrink-0" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+							<i class="bi-cart-fill me-1"></i>
+							Bilgi Al
+						</button>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+ 
+@section Scripts
+	{
+	@if (TempData["basarili"] != null)
+	{
+		<script>
+			Swal.fire({
+				title: "BASARILI",
+				text: "@TempData["basarili"]",
+				icon: "success"
+			});
+		</script>
+	}
+}
+
+<partial name="Musteri" model="null" />
+
+
